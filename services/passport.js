@@ -13,7 +13,6 @@ passport.deserializeUser((id, done) => {
   User.findById(id).then(user => {
     done(null, user);
   });
-
 });
 
 passport.use(
@@ -24,14 +23,15 @@ passport.use(
       callbackURL: '/auth/google/callback',
       proxy: true
     }, (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then((existingUser) => {
+      User.findOne({ googleId: profile.id })
+        .then((existingUser) => {
         if (existingUser) {
           // we already have a record
           console.log('user exists');
           done(null, existingUser);
         } else {
           // create user
-          new User({ googleId: profile.id})
+          new User({ googleId: profile.id, username: profile.displayName })
               .save()
             .then( user => done(null, user));
         }
