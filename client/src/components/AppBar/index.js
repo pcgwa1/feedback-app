@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../../assets/icons/feedback.svg';
+import Payments from '../Payments';
+import Logo from '../../assets/icons/feedback-logo.svg';
 
 const Wrapper = styled.nav`
   > ul {
@@ -21,21 +22,13 @@ const Top = styled.li`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    height: 20%;
     background-color: #4CAF50; 
     color: #fff;
     padding: 15px 0px 15px 30px;
     text-decoration: none;
     max-width: 100%;
-        
-    > a {
-      font-size: 25px;
-      font-weight: bold;
-      text-decoration: none;
-      width: 100%;
-      color: #fff;
-      text-transform: uppercase;
-    }
-    
+            
     > i {
     font-size: 10px;
       width: 100%;
@@ -63,7 +56,23 @@ const LinkWrapper = styled.li`
 `;
 
 const Image = styled.img`
-  width: 50px;
+  width: 100px;
+`;
+
+const LogoLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  width: 100%;
+  color: #fff;
+  text-transform: uppercase;
+`;
+
+const PaymentWrapper = styled.div`
+  align-self: flex-start;
 `;
 
 export default class Header extends Component {
@@ -73,15 +82,21 @@ export default class Header extends Component {
       <Wrapper>
         <ul>
           <Top>
-            <Link to='/'>
+            <LogoLink to='/'>
             Feedback App
             <Image src={Logo} />
-            </Link>
+            </LogoLink>
+            <PaymentWrapper>
+              <Payments />
+            </PaymentWrapper>
+            {user ? <p>Credits: {user.credits}</p> : <div />}
             <i>Welcome {user ? user.username : 'Guest'}</i>
           </Top>
           <LinkWrapper><Link to='/surveys'>Dashboard</Link></LinkWrapper>
           {user ? <LinkWrapper><Link to='/surveys/new'>Survey</Link></LinkWrapper> : <div />}
-          {user ? <LinkWrapper><a href='/api/logout'>Logout</a></LinkWrapper> : <LinkWrapper><a href='/auth/google'>Sign In Using Google</a></LinkWrapper>}
+          {user ?
+            <LinkWrapper><a href='/api/logout'>Logout</a></LinkWrapper> :
+            <LinkWrapper><a href='/auth/google'>Sign In Using Google</a></LinkWrapper>}
         </ul>
       </Wrapper>
     );

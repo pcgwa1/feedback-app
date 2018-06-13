@@ -5,7 +5,7 @@ class Survey extends PureComponent {
   render() {
     return (
       <Container>
-        Survey
+        Survey List
       </Container>
     );
   }

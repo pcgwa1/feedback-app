@@ -8,3 +8,10 @@ export function fetchUserData(data) {
     payload: data,
   };
 }
+
+export function setStripeResponseToState(token) {
+  return {
+    type: FETCH_USER,
+    payload: token,
+  };
+}
