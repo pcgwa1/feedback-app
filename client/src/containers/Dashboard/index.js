@@ -5,7 +5,7 @@ class Dash extends PureComponent {
   render() {
     return (
       <Container>
-        Dash
+        Survey Dashboard
       </Container>
     );
   }

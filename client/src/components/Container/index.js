@@ -2,16 +2,10 @@ import styled from 'styled-components';
 
 export default styled.div`
   ${props => (props.hide ? 'display: none;' : '')};
-  padding: 0 1em;
+  padding: 1em 1em 1em 20%;
   margin: 0 auto;
-  ${props => props.theme.breakpoints.tablet} {
-    max-width: 960px;
-  }
-  ${props => props.theme.breakpoints.desktop} {
-    display: block;
-    max-width: 1231px;
-  }
-  ${props => props.theme.breakpoints.XLargeDesktop} {
-    max-width: 1560px;
-  }
+  width: 100%;
+  height: 100vh;
+  background-color: #333;
+  color: white;
 `;
