@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from "axios";
 import Payments from '../Payments';
 import Logo from '../../assets/icons/feedback-logo.svg';
 
 const Wrapper = styled.nav`
+  display: ${props => props.show ? 'flex' : 'none'};
   > ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
-      width: 17%;
+      width: 20%;
       background-color: #f1f1f1;
       position: fixed;
       height: 100%;
@@ -27,13 +29,7 @@ const Top = styled.li`
     color: #fff;
     padding: 15px 0px 15px 30px;
     text-decoration: none;
-    max-width: 100%;
-            
-    > i {
-    font-size: 10px;
-      width: 100%;
-    }
-   
+    max-width: 100%;   
 `;
 
 const LinkWrapper = styled.li`
@@ -41,7 +37,9 @@ const LinkWrapper = styled.li`
       align-items: center; 
     
     > a {
-      display: block;
+      display: flex;
+      align-items: center;
+      //justify-content: space-between; 
       color: #000;
       padding: 15px 30px;
       text-decoration: none;
@@ -63,7 +61,7 @@ const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
   text-decoration: none;
   width: 100%;
@@ -72,31 +70,66 @@ const LogoLink = styled(Link)`
 `;
 
 const PaymentWrapper = styled.div`
-  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
 `;
+
+const UserDetailsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const Credits = styled.p`
+  font-size: 18px;
+  margin: 0 30px 0 0;
+  font-weight: bold;
+  padding: 0;
+`;
+
+const Welcome = styled.i`
+  font-size: 20px;
+  width: 100%;
+`;
+
+export async function logOut(requestURL = fetch) {
+  const response = await requestURL('/api/logout', { method: 'GET' });
+
+  if(response.status === 200) {
+    console.log(response.status);
+    const res = await axios.get('/api/current-user');
+    console.log(res);
+  }
+}
+
+// export async function getAuthGoogle(requestURL = fetch) {
+//   await requestURL('/auth/google', { method: 'GET', mode: 'cors', headers:{'Access-Control-Allow-Origin':'*'}, });
+// }
 
 export default class Header extends Component {
   render() {
     const { user } = this.props;
     return (
-      <Wrapper>
+      <Wrapper show={!!user}>
         <ul>
           <Top>
             <LogoLink to='/'>
             Feedback App
             <Image src={Logo} />
             </LogoLink>
-            <PaymentWrapper>
-              <Payments />
-            </PaymentWrapper>
-            {user ? <p>Credits: {user.credits}</p> : <div />}
-            <i>Welcome {user ? user.username : 'Guest'}</i>
+            <UserDetailsWrapper>
+              <PaymentWrapper>
+                {user ? <Payments /> : <div />}
+                {user ? <Credits>Credits: {user.credits}</Credits> : <div />}
+              </PaymentWrapper>
+              <Welcome>Welcome {user ? user.username : 'Guest'}</Welcome>
+            </UserDetailsWrapper>
           </Top>
-          <LinkWrapper><Link to='/surveys'>Dashboard</Link></LinkWrapper>
+          {user ? <LinkWrapper><Link to='/surveys'>Dashboard</Link></LinkWrapper> : <div />}
           {user ? <LinkWrapper><Link to='/surveys/new'>Survey</Link></LinkWrapper> : <div />}
-          {user ?
-            <LinkWrapper><a href='/api/logout'>Logout</a></LinkWrapper> :
-            <LinkWrapper><a href='/auth/google'>Sign In Using Google</a></LinkWrapper>}
+          {user ? <LinkWrapper><a href='/api/logout'>Logout</a></LinkWrapper> : <div />}
         </ul>
       </Wrapper>
     );
