@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 import store from './Store';
-import App from './App';
+// import App from './App';
+import App from './AppProtected';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -14,5 +15,3 @@ ReactDOM.render(
   </Provider>,
   document.querySelector('#root')
 );
-
-// console.log('Our stripe key is ', process.env.REACT_APP_STRIPE_KEY);
