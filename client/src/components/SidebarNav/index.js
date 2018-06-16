@@ -24,7 +24,6 @@ const LinkWrapper = styled.li`
     > a {
       display: flex;
       align-items: center;
-      //justify-content: space-between; 
       color: #000;
       padding: 15px 30px;
       text-decoration: none;
@@ -58,11 +57,11 @@ const UserDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 18px 0;
+  margin: 50px 0 0 0;
 `;
 
 const Welcome = styled.i`
-  font-size: 20px;
+  font-size: 12px;
   width: 100%;
 `;
 
@@ -78,7 +77,7 @@ export default class SidebarNav extends Component {
              <Image src={Logo} />
            </LogoLink>
            <UserDetailsWrapper>
-             <Welcome>Welcome {user ? user.username : 'Guest'}</Welcome>
+             <Welcome>Hello {user ? user.username : 'Guest'}</Welcome>
            </UserDetailsWrapper>
           </Top>
           {user ? <LinkWrapper><Link to='/surveys'>Dashboard</Link></LinkWrapper> : <div />}
