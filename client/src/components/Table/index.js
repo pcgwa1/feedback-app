@@ -1,24 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
-export const TableWrapper = styled.div`
-  max-width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-gap: 0;
-  border: 1px solid red;
-  grid-template-areas:
-          "row";
-          
-  @media (min-width: 700px) {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-            "header1 header2 header3"
-            "row";
-  } 
-`;
-
 export const HeaderWrapper = styled.div`
   grid-area: row;
   width: 100%;
@@ -109,6 +91,18 @@ export const Body = styled.div`
   padding: 0 12px;
 `;
 
+export const MainWrapper = styled.div`
+  margin-right: 18px;
+  max-width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+  padding: 18px 24px;
+  
+  @media (min-width: 1400px) {
+    max-width: 50%;
+  } 
+  
+`;
+
 export function renderRows(surveyList) {
   return(
     surveyList.map((survey, index) => {
@@ -133,7 +127,7 @@ class Table extends PureComponent {
   render() {
     const { surveyList } = this.props;
     return (
-      <div>
+      <MainWrapper>
         <HeaderWrapper>
           <Header1>
             <div>Title</div>
@@ -146,7 +140,7 @@ class Table extends PureComponent {
           </Header3>
         </HeaderWrapper>
         {renderRows(surveyList)}
-      </div>
+      </MainWrapper>
     );
   }
 }
