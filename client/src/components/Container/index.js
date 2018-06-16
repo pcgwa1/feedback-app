@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export default styled.div`
   ${props => (props.hide ? 'display: none;' : '')};
-  padding: 1em 1em 1em 25%;
-  margin: 0 auto;
-  width: 100%;
-  height: 100vh;
-  background-color: #333;
-  color: white;
+  position: relative;
+  padding: 5em 3em;
+  margin: 0 20%;
+  width: 80%;
+  height: 100%;
+  color: black;
 `;

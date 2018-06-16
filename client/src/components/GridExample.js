@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import Container from '../../components/Container';
 
 export const MainWrapper = styled.div`
   max-width: 100%;
@@ -13,15 +14,17 @@ export const MainWrapper = styled.div`
           "header"
           "nav"
           "content"
+          "sidebar"
+          "ad"
           "footer";
           
   @media (min-width: 700px) {
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr 4fr 1fr;
     grid-template-areas:
-            "nav    header "
-            "nav    content"
-            "nav    content "
-            "nav    footer "
+            "header header  header"
+            "nav    content sidebar"
+            "nav    content ad"
+            "footer footer  footer"
 
   } 
 `;
@@ -29,7 +32,6 @@ export const MainWrapper = styled.div`
 export const Header = styled.header`
    grid-area: header;
    border: 1px solid green;
-   height: 50px;
 `;
 
 export const Navbar = styled.nav`
@@ -52,7 +54,7 @@ export const Navbar = styled.nav`
 export const Content = styled.article`
    grid-area: content;
    border: 1px solid green;
-   height: 100%;
+   
    > ul {
       list-style: none;
       margin: 0;
@@ -109,6 +111,8 @@ class Home extends PureComponent {
           <h1>Main article area</h1>
           <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.</p>
         </Content>
+        <Sidebar >Sidebar</Sidebar>
+        <Advert>Advertising</Advert>
         <Footer>The footer</Footer>
       </MainWrapper>
     );

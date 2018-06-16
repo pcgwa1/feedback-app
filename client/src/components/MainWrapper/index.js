@@ -1,12 +1,11 @@
-import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 export const MainWrapper = styled.div`
   max-width: 100%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
+  bottom: 0;
   font: 1.2em Helvetica, arial, sans-serif;
-  border: 1px solid green; 
   display: grid;
   grid-gap: 0;
   grid-template-areas:
@@ -15,26 +14,30 @@ export const MainWrapper = styled.div`
           "content"
           "footer";
           
-  @media (min-width: 700px) {
+  ${props => props.theme.breakpoints.tablet} {
+    height: 100vh;
     grid-template-columns: 1fr 5fr;
     grid-template-areas:
             "nav    header "
             "nav    content"
             "nav    content "
-            "nav    footer "
+            "nav    footer ";
 
   } 
 `;
 
-export const Header = styled.header`
+export const HeaderWrapper = styled.header`
    grid-area: header;
-   border: 1px solid green;
-   height: 50px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 80px;
+   background: #fff;
 `;
 
 export const Navbar = styled.nav`
    grid-area: nav;
-   border: 1px solid green;
+   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
    
    > ul {
       list-style: none;
@@ -42,7 +45,7 @@ export const Navbar = styled.nav`
       padding: 0;
   }
   
-  @media (min-width: 700px) {
+  ${props => props.theme.breakpoints.tablet} {
     > ul {
         flex-direction: column;
     }
@@ -51,7 +54,7 @@ export const Navbar = styled.nav`
 
 export const Content = styled.article`
    grid-area: content;
-   border: 1px solid green;
+   padding: 0 12px;
    height: 100%;
    > ul {
       list-style: none;
@@ -92,27 +95,3 @@ export const Footer = styled.footer`
       padding: 0;
   }
 `;
-
-class Home extends PureComponent {
-  render() {
-    return (
-      <MainWrapper>
-        <Header>The header</Header>
-        <Navbar>
-          <ul>
-            <li><a href="">Nav 1</a></li>
-            <li><a href="">Nav 2</a></li>
-            <li><a href="">Nav 3</a></li>
-          </ul>
-        </Navbar>
-        <Content>
-          <h1>Main article area</h1>
-          <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.</p>
-        </Content>
-        <Footer>The footer</Footer>
-      </MainWrapper>
-    );
-  }
-}
-
-export default Home;

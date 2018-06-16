@@ -4,19 +4,21 @@ import styled from 'styled-components';
 import axios from "axios";
 import Payments from '../Payments';
 import Logo from '../../assets/icons/feedback-logo.svg';
+import { Navbar } from '../MainWrapper';
 
 const Wrapper = styled.nav`
-  display: ${props => props.show ? 'flex' : 'none'};
-  > ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      width: 20%;
-      background-color: #f1f1f1;
-      position: fixed;
-      height: 100%;
-      overflow: auto;
-  }
+// position: absolute;
+//   display: ${props => props.show ? 'flex' : 'none'};
+//   > ul {
+//       list-style-type: none;
+//       margin: 0;
+//       padding: 0;
+//       //width: 20%;
+//       background-color: #f1f1f1;
+//       position: fixed;
+//       //height: 100%;
+//       overflow: auto;
+//   }
 `;
 
 const Top = styled.li`
@@ -80,6 +82,7 @@ const UserDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin: 18px 0;
 `;
 
 const Credits = styled.p`
@@ -98,9 +101,7 @@ export async function logOut(requestURL = fetch) {
   const response = await requestURL('/api/logout', { method: 'GET' });
 
   if(response.status === 200) {
-    console.log(response.status);
     const res = await axios.get('/api/current-user');
-    console.log(res);
   }
 }
 
@@ -108,30 +109,26 @@ export async function logOut(requestURL = fetch) {
 //   await requestURL('/auth/google', { method: 'GET', mode: 'cors', headers:{'Access-Control-Allow-Origin':'*'}, });
 // }
 
-export default class Header extends Component {
+export default class SidebarNav extends Component {
   render() {
     const { user } = this.props;
     return (
-      <Wrapper show={!!user}>
+      <Navbar>
         <ul>
           <Top>
-            <LogoLink to='/'>
-            Feedback App
-            <Image src={Logo} />
-            </LogoLink>
-            <UserDetailsWrapper>
-              <PaymentWrapper>
-                {user ? <Payments /> : <div />}
-                {user ? <Credits>Credits: {user.credits}</Credits> : <div />}
-              </PaymentWrapper>
-              <Welcome>Welcome {user ? user.username : 'Guest'}</Welcome>
-            </UserDetailsWrapper>
+           <LogoLink to='/'>
+             Feedback App
+             <Image src={Logo} />
+           </LogoLink>
+           <UserDetailsWrapper>
+             <Welcome>Welcome {user ? user.username : 'Guest'}</Welcome>
+           </UserDetailsWrapper>
           </Top>
           {user ? <LinkWrapper><Link to='/surveys'>Dashboard</Link></LinkWrapper> : <div />}
-          {user ? <LinkWrapper><Link to='/surveys/new'>Survey</Link></LinkWrapper> : <div />}
+          {user ? <LinkWrapper><Link to='/surveys/new'>Create Survey</Link></LinkWrapper> : <div />}
           {user ? <LinkWrapper><a href='/api/logout'>Logout</a></LinkWrapper> : <div />}
         </ul>
-      </Wrapper>
+      </Navbar>
     );
   }
 }
