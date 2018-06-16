@@ -2,11 +2,11 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import formFields from './formFields';
-import {Link, withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import * as actions from '../../actions';
-import axios from "axios/index";
 
 export const FormWrapper = styled.div`
   margin-right: 18px;

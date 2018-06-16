@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from "axios";
-import Payments from '../Payments';
 import Logo from '../../assets/icons/feedback-logo.svg';
 import { Navbar } from '../MainWrapper';
-
-const Wrapper = styled.nav`
-// position: absolute;
-//   display: ${props => props.show ? 'flex' : 'none'};
-//   > ul {
-//       list-style-type: none;
-//       margin: 0;
-//       padding: 0;
-//       //width: 20%;
-//       background-color: #f1f1f1;
-//       position: fixed;
-//       //height: 100%;
-//       overflow: auto;
-//   }
-`;
 
 const Top = styled.li`
     display: flex;
@@ -71,13 +54,6 @@ const LogoLink = styled(Link)`
   text-transform: uppercase;
 `;
 
-const PaymentWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 16px 0;
-`;
-
 const UserDetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -85,29 +61,10 @@ const UserDetailsWrapper = styled.div`
   margin: 18px 0;
 `;
 
-const Credits = styled.p`
-  font-size: 18px;
-  margin: 0 30px 0 0;
-  font-weight: bold;
-  padding: 0;
-`;
-
 const Welcome = styled.i`
   font-size: 20px;
   width: 100%;
 `;
-
-export async function logOut(requestURL = fetch) {
-  const response = await requestURL('/api/logout', { method: 'GET' });
-
-  if(response.status === 200) {
-    const res = await axios.get('/api/current-user');
-  }
-}
-
-// export async function getAuthGoogle(requestURL = fetch) {
-//   await requestURL('/auth/google', { method: 'GET', mode: 'cors', headers:{'Access-Control-Allow-Origin':'*'}, });
-// }
 
 export default class SidebarNav extends Component {
   render() {
