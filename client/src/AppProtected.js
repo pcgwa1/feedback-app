@@ -6,22 +6,18 @@ import {
   Switch,
 } from "react-router-dom";
 import {connect} from "react-redux";
-import axios from 'axios';
-import AppBar from './components/AppBar';
+import Header from './components/Header';
+import SidebarNav from './components/SidebarNav';
 import Landing from './containers/Landing';
 import Login from './containers/Login';
-import SurveyNew from './containers/Survey';
+import SurveyNew from './containers/Surveys/SurveyNew';
+import { MainWrapper } from './components/MainWrapper';
 import ScrollTop from './ScrollToTop';
 import { fetchUserData } from './actions';
+import { getData } from './functions';
 import './App.css';
 import asyncComponent from './components/AsyncComponent';
 const Dashboard = asyncComponent(() => import('./containers/Dashboard'));
-
-/* Get API data */
-export async function getData() {
-  const res = await axios.get('/api/current-user');
-  return res.data
-}
 
 const PrivateRoute = ({ component: Component, ...rest, user }) => (
   <Route
@@ -56,13 +52,16 @@ class App extends Component {
       <div className="App">
         <Router>
           <ScrollTop>
-            <AppBar user={user} />
-            <Switch>
-              <Route exact path='/' component={Login} />
-              <Route exact path='/landing' component={Landing} />
-              <PrivateRoute exact path='/surveys' component={Dashboard} user={user} />
-              <PrivateRoute exact path='/surveys/new' component={SurveyNew} user={user} />
-            </Switch>
+            <MainWrapper>
+              <Header user={user} />
+              <SidebarNav user={user} />
+              <Switch>
+                <Route exact path='/' component={Login} />
+                <Route exact path='/landing' component={Landing} />
+                <PrivateRoute exact path='/surveys' component={Dashboard} user={user} />
+                <PrivateRoute exact path='/surveys/new' component={SurveyNew} user={user} />
+              </Switch>
+            </MainWrapper>
           </ScrollTop>
         </Router>
       </div>
