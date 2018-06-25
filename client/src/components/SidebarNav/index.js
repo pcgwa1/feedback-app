@@ -68,8 +68,9 @@ const Welcome = styled.i`
 export default class SidebarNav extends Component {
   render() {
     const { user } = this.props;
+    console.log(!user);
     return (
-      <Navbar>
+      <Navbar hide={!user}>
         <ul>
           <Top>
            <LogoLink to='/'>

@@ -38,7 +38,7 @@ export const HeaderWrapper = styled.header`
 export const Navbar = styled.nav`
    grid-area: nav;
    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
-   
+   ${props => props.hide ? 'display: none' : ''};
    > ul {
       list-style: none;
       margin: 0;

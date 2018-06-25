@@ -13,8 +13,9 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
+    "dev-server": "concurrently \"npm run server\" \"npm run webhook\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "webhook": "./sendgrid_webhook.sh"
+    "webhook": "forever sendgrid_webhook.js"
   },
   "author": "Peter Gwaka",
   "license": "ISC",
@@ -26,6 +27,7 @@
     "cookie-session": "2.0.0-beta.3",
     "cross-env": "5.1.3",
     "express": "4.16.2",
+    "localtunnel": "^1.9.0",
     "lodash": "^4.17.10",
     "mongoose": "5.0.10",
     "passport": "0.4.0",
@@ -37,6 +39,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "forever": "^0.15.3",
     "nodemon": "1.17.1"
   }
 }

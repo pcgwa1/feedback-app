@@ -8,7 +8,7 @@ export const LoginWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: #4CAF50;   
 `;
@@ -59,6 +59,7 @@ const Title = styled.h1`
   width: 100%;
   color: #fff;
   text-transform: uppercase;
+  margin-right: 28px;
 `;
 
 class Login extends PureComponent {
