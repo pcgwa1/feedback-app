@@ -10,7 +10,6 @@ export const submitSurvey = async () => {
     recipients: 'pgwaka@gmail.com, peter@bnry.digital',
   };
   const res = await axios.post('/api/surveys', values);
-  console.log(res);
 };
 class Survey extends PureComponent {
   render() {

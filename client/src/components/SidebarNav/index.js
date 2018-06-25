@@ -68,7 +68,6 @@ const Welcome = styled.i`
 export default class SidebarNav extends Component {
   render() {
     const { user } = this.props;
-    console.log(!user);
     return (
       <Navbar hide={!user}>
         <ul>
