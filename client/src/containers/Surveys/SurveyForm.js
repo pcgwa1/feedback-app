@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import SurveyField from './SurveyField';
 import validateEmails from '../../utils/validateEmails';
@@ -26,49 +25,59 @@ export const ButtonWrapper = styled.div`
   margin: 18px 0;
 `;
 
-export const CancelButton = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  margin-top: 10px;
-	margin-right: 10px;
-	padding: 15px 40px;
-	font-size: 18px;
-	line-height: 1em;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
-	color: black;
-	font-weight: normal;
-	transition: background 0.1s ease-in-out;
-	border-radius: 3px;
-  background-color: #fff;
-	box-shadow: 0 1px 1px 0 #000;
-	outline: none;
-	cursor: pointer;
+const BtnText = styled.p`
+  color : black;
+  transition : .3s;
+  font-weight: bold;
+    
+`;
+
+const RightBtnTwo = styled.div`
+  position : relative;
+  width : 200px;
+  height : 120px;
+  margin-top: -100px;
+  padding-top: 2px;
+  background : #333;
+  left : 250px;
+  transition : .3s;
+`;
+
+const RightBtnText2 = styled.p`
+  margin-top : 65px;;
+  margin-right : 130px;
+  color : #FFF;
 `;
 
 export const NextButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-	margin-right: 10px;
-	padding: 15px 40px;
-	font-size: 18px;
-	line-height: 1em;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
-	color: black;
-	font-weight: normal;
-	transition: background 0.1s ease-in-out;
-	border-radius: 3px;
-  background-color: #fff;
-	box-shadow: 0 1px 0 0 #000;
-	outline: none;
-	cursor: pointer;
+  background: #fff;
+  margin : 0;
+  width : 200px;
+  height : 50px;
+  overflow: hidden;
+  text-align : center;
+  transition : .2s;
+  cursor : pointer;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+  text-decoration: none;
+  outline: none;
+
+  :hover ${RightBtnTwo} {
+    left: 130px;
+  }
+  
+  :hover ${BtnText} {
+    margin-left : -65px;
+  }
+  
+  :active {
+    box-shadow: 0 5px 6px rgba(0,0,0,0.3);
+}
 `;
 
-export const Arrow = styled.i`
-  border: solid black;
+export const ArrowRight = styled.i`
+  border: solid white;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
@@ -84,7 +93,7 @@ class SurveyForm extends Component {
         <Field
           key={name}
           component={SurveyField}
-          type="text"
+          type='text'
           label={label}
           name={name}
         />
@@ -101,12 +110,11 @@ class SurveyForm extends Component {
             {this.renderFields()}
           </Wrapper>
           <ButtonWrapper>
-            <CancelButton to="/surveys">
-              Cancel
-            </CancelButton>
-            <NextButton type="submit">
-              Next
-              <Arrow />
+            <NextButton type='submit'>
+              <BtnText>NEXT</BtnText>
+              <RightBtnTwo>
+                <RightBtnText2><ArrowRight /></RightBtnText2>
+              </RightBtnTwo>
             </NextButton>
           </ButtonWrapper>
         </form>

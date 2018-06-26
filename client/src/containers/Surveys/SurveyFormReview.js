@@ -4,9 +4,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import formFields from './formFields';
-import { withRouter } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 import * as actions from '../../actions';
+import LoadingButton from '../../components/LoadingButton';
 
 export const FormWrapper = styled.div`
   margin-right: 18px;
@@ -23,6 +24,7 @@ export const Wrapper = styled.div`
   
   > label {
     font-size: 18px;
+    margin: 12px 0;
   }
 `;
 
@@ -33,24 +35,64 @@ export const ButtonWrapper = styled.div`
   margin: 18px 0;
 `;
 
-export const NextButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-	margin-right: 10px;
-	padding: 15px 40px;
-	font-size: 18px;
-	line-height: 1em;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
-	color: black;
-	font-weight: normal;
-	transition: background 0.1s ease-in-out;
-	border-radius: 3px;
-  background-color: #fff;
-	box-shadow: 0 1px 0 0 #000;
-	outline: none;
-	cursor: pointer;
+const BtnText = styled.p`
+  color : black;
+  transition : .3s;
+  font-weight: bold;
+    
+`;
+
+const BtnTwo = styled.div`
+  position : relative;
+  width : 200px;
+  height : 120px;
+  margin-top: -100px;
+  padding-top: 2px;
+  background : #333;
+  left : -250px;
+  transition : .3s;
+`;
+
+const BtnText2 = styled.p`
+  margin-top : 65px;
+  margin-right : -130px;
+  color : #FFF;
+`;
+
+export const CancelButton = styled.button`
+  background: #fff;
+  margin : 0;
+  width : 200px;
+  height : 50px;
+  overflow: hidden;
+  text-align : center;
+  transition : .2s;
+  cursor : pointer;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+  text-decoration: none;
+
+  :hover ${BtnTwo} {
+    left: -130px;
+  }
+  
+  :hover ${BtnText} {
+    margin-left : 65px;
+  }
+  
+  :active {
+    box-shadow: 0 5px 6px rgba(0,0,0,0.3);
+}
+`;
+
+export const Arrow = styled.i`
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin: 0 8px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 `;
 
 export const submitSurvey = async (formValues, updateUser, history) => {
@@ -78,16 +120,18 @@ const SurveyFormReview = ({ onCancel, formValues, updateUser, history }) => {
       <h5>Please confirm your entries</h5>
       {reviewFields}
       <ButtonWrapper>
-        <NextButton
-          onClick={onCancel}
-        >
-          Back
-        </NextButton>
-        <NextButton
-          onClick={() => submitSurvey(formValues, updateUser, history)}
-        >
-          Send Survey
-        </NextButton>
+        <CancelButton onClick={onCancel}>
+          <BtnText>BACK</BtnText>
+          <BtnTwo>
+            <BtnText2><Arrow /></BtnText2>
+          </BtnTwo>
+        </CancelButton>
+        <LoadingButton
+          submitSurvey={submitSurvey}
+          formValues={formValues}
+          updateUser={updateUser}
+          history={history}
+        />
       </ButtonWrapper>
     </FormWrapper>
   );

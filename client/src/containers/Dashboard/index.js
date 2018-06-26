@@ -24,10 +24,11 @@ class Dash extends PureComponent {
   }
   render() {
     const { surveyList } = this.state;
+    const { user } = this.props;
     return (
       <Content>
         <h1>Survey Dashboard</h1>
-        <Table surveyList={surveyList} />
+        <Table surveyList={surveyList} user={user} />
       </Content>
     );
   }

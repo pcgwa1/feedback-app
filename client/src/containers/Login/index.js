@@ -141,7 +141,7 @@ class Login extends PureComponent {
         </LogoWrapper>
           <Button href='/auth/google' onClick={this.toggle}>
             <BtnText show={show}>Login using Google</BtnText>
-            <Loader show={show} className="lds-ellipsis">
+            <Loader show={show} className="loader">
               <div/>
               <div/>
               <div/>

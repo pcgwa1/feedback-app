@@ -23,9 +23,20 @@ const PrivateRoute = ({ component: Component, ...rest, user, updateUser }) => (
   <Route
     {...rest}
     render={props => {
+      const protectPath = props.location.pathname === '/surveys/new';
+      const hasCredits = user ? user.credits !== 0 : false;
       return (
         !!user ? (
-          <Component {...props} updateUser={updateUser} />
+          !hasCredits && protectPath ?
+            (
+              <Redirect
+                to={{
+                  pathname: "/surveys",
+                  state: { from: props.location }
+                }}
+              />
+            ) :
+            <Component {...props} updateUser={updateUser} />
         ) : (
           <Redirect
             to={{

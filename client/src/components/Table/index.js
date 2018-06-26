@@ -139,7 +139,12 @@ class Table extends PureComponent {
           <div>Body</div>
           </Header3>
         </HeaderWrapper>
-        {renderRows(surveyList)}
+        {surveyList.length ? renderRows(surveyList) :
+          <p>
+            You have not created any surveys. In order to create a survey,
+            add email credits and click Create Survey.
+          </p>
+        }
       </MainWrapper>
     );
   }

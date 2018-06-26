@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Logo from '../../assets/icons/feedback-logo.svg';
 import { Navbar } from '../MainWrapper';
@@ -65,7 +66,7 @@ const Welcome = styled.i`
   width: 100%;
 `;
 
-export default class SidebarNav extends Component {
+export class SidebarNav extends Component {
   constructor(props) {
     super(props);
     this.setLocation = this.setLocation.bind(this);
@@ -96,7 +97,7 @@ export default class SidebarNav extends Component {
           <LinkWrapper onClick={() => this.setLocation('/surveys')} active={page === '/surveys'}>
             <Link to='/surveys'>Dashboard</Link>
           </LinkWrapper>
-          <LinkWrapper onClick={() => this.setLocation('/surveys/new')} active={page === '/surveys/new'}>
+          <LinkWrapper onClick={() => user.credits > 0 ? this.setLocation('/surveys/new') : ''} active={page === '/surveys/new'}>
             <Link to='/surveys/new'>Create Survey</Link>
           </LinkWrapper>
           <LinkWrapper onClick={() => this.setLocation('/api/logout')} active={page === '/api/logout'}>
@@ -107,3 +108,5 @@ export default class SidebarNav extends Component {
     );
   }
 }
+
+export default connect(null, null)(withRouter(SidebarNav));
