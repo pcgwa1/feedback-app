@@ -12,18 +12,19 @@
   },
   "dependencies": {
     "axios": "0.18.0",
-    "easy-scroll": "^0.5.1",
+    "easy-scroll": "0.5.1",
     "react": "16.4.0",
     "react-dom": "16.4.0",
-    "react-redux": "^5.0.7",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
+    "react-redux": "5.0.7",
+    "react-router": "4.3.1",
+    "react-router-dom": "4.3.1",
     "react-scripts": "1.1.4",
-    "react-stripe-checkout": "^2.6.3",
-    "redux": "^4.0.0",
-    "redux-form": "^7.4.0",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^3.3.2"
+    "react-stripe-checkout": "2.6.3",
+    "reactour": "1.8.1",
+    "redux": "4.0.0",
+    "redux-form": "7.4.0",
+    "redux-thunk": "2.3.0",
+    "styled-components": "3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
