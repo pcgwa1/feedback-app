@@ -14,28 +14,6 @@ export const LoginWrapper = styled.div`
   background-color: #4CAF50;   
 `;
 
-const LinkWrapper = styled.div`
-      display: flex;
-      align-items: center;
-      border: 1px solid silver;
-      background: white; 
-    
-    > a {
-      display: flex;
-      align-items: center;
-      color: #000;
-      padding: 15px 30px;
-      text-decoration: none;
-      width: 100%;
-      font-weight: bold;
-            
-      &:hover {
-        background-color: #333;
-        color: white;
-      }
-    }
-`;
-
 const GoogleIcon = styled.img`
   margin-right: 10px;
   
@@ -80,7 +58,6 @@ const BtnTwo = styled.div`
   padding-top: 2px;
   background : #fff;
   left : ${props => props.show ? '-250px' : '-130px'};
-  //left : -250px;
   transition : .3s;
 `;
 
@@ -149,7 +126,6 @@ class Login extends PureComponent {
           <Title>Feedback App</Title>
           <Image src={Logo} />
         </LogoWrapper>
-          {/*<Button href='/auth/google' onClick={this.toggle}>*/}
           <Button href='/auth/google' onClick={this.toggle}>
             <BtnText show={show}>Login using Google</BtnText>
             <Loader show={show} className="lds-ellipsis">

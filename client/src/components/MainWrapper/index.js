@@ -31,14 +31,16 @@ export const HeaderWrapper = styled.header`
    display: flex;
    justify-content: center;
    align-items: center;
-   height: 80px;
    background: #fff;
+   ${props => props.hide ? 'height: 0px' : 'height: 80px'};
 `;
 
 export const Navbar = styled.nav`
    grid-area: nav;
    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
-   ${props => props.hide ? 'display: none' : ''};
+   ${props => props.hide ? 'width: 0vw' : 'width: 20vw'};
+   
+   transition : .3s;
    > ul {
       list-style: none;
       margin: 0;

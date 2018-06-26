@@ -5,7 +5,7 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Header from './components/Header';
 import SidebarNav from './components/SidebarNav';
 import Landing from './containers/Landing';

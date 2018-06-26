@@ -34,7 +34,7 @@ export default class Header extends Component {
   render() {
     const { user } = this.props;
     return (
-      <HeaderWrapper>
+      <HeaderWrapper hide={!user}>
         <ButtonWrapper>
           {user ? <CreditsWrapper>Email Credits<Credits>{user.credits}</Credits></CreditsWrapper> : <div/>}
           {user ? <Payments /> : <div />}
