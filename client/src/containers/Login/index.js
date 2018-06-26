@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from "react-redux";
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Logo from '../../assets/icons/feedback-logo.svg';
 import './styles.css';
 
@@ -67,6 +67,16 @@ const BtnText2 = styled.p`
   color : #FFF;
 `;
 
+const fade = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
 const Button = styled.a`
   text-decoration: none;
   background: #333;
@@ -79,6 +89,9 @@ const Button = styled.a`
   cursor : pointer;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  
+  animation: ${fade} 0s 2s forwards;
+  opacity: 0;
   
   &:hover { /*Clicked and held*/
       box-shadow: 0 5px 6px rgba(0,0,0,0.3);
