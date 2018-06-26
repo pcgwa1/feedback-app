@@ -8,11 +8,12 @@ import { Content } from '../../components/MainWrapper';
 class SurveyNew extends Component {
   state = { showFormReview: false };
 
-  renderContent() {
+  renderContent(updateUser) {
     if (this.state.showFormReview) {
       return (
         <SurveyFormReview
           onCancel={() => this.setState({ showFormReview: false })}
+          updateUser={updateUser}
         />
       );
     }
@@ -25,9 +26,10 @@ class SurveyNew extends Component {
   }
 
   render() {
+    const { updateUser } =this.props;
     return (
       <Content>
-        {this.renderContent()}
+        {this.renderContent(updateUser)}
       </Content>
     );
   }

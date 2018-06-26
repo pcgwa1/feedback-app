@@ -53,12 +53,15 @@ export const NextButton = styled.button`
 	cursor: pointer;
 `;
 
-export const submitSurvey = async (formValues, history) => {
-  await axios.post('/api/surveys', formValues);
-  history.push('/surveys');
+export const submitSurvey = async (formValues, updateUser, history) => {
+  const response = await axios.post('/api/surveys', formValues);
+  if(response.status === 200) {
+    updateUser(response.data);
+    history.push('/surveys');
+  }
 };
 
-const SurveyFormReview = ({ onCancel, formValues, history }) => {
+const SurveyFormReview = ({ onCancel, formValues, updateUser, history }) => {
   const reviewFields = _.map(formFields, ({ name, label }) => {
     return (
       <Wrapper key={name}>
@@ -81,7 +84,7 @@ const SurveyFormReview = ({ onCancel, formValues, history }) => {
           Back
         </NextButton>
         <NextButton
-          onClick={() => submitSurvey(formValues, history)}
+          onClick={() => submitSurvey(formValues, updateUser, history)}
         >
           Send Survey
         </NextButton>

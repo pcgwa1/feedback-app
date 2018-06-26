@@ -5,7 +5,7 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Header from './components/Header';
 import SidebarNav from './components/SidebarNav';
 import Landing from './containers/Landing';
@@ -19,13 +19,13 @@ import './App.css';
 import asyncComponent from './components/AsyncComponent';
 const Dashboard = asyncComponent(() => import('./containers/Dashboard'));
 
-const PrivateRoute = ({ component: Component, ...rest, user }) => (
+const PrivateRoute = ({ component: Component, ...rest, user, updateUser }) => (
   <Route
     {...rest}
     render={props => {
       return (
         !!user ? (
-          <Component {...props} />
+          <Component {...props} updateUser={updateUser} />
         ) : (
           <Redirect
             to={{
@@ -58,8 +58,8 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Login} />
                 <Route exact path='/landing' component={Landing} />
-                <PrivateRoute exact path='/surveys' component={Dashboard} user={user} />
-                <PrivateRoute exact path='/surveys/new' component={SurveyNew} user={user} />
+                <PrivateRoute exact path='/surveys' component={Dashboard} user={user} updateUser={this.props.fetchUser}  />
+                <PrivateRoute exact path='/surveys/new' component={SurveyNew} user={user} updateUser={this.props.fetchUser} />
               </Switch>
             </MainWrapper>
           </ScrollTop>

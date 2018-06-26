@@ -42,7 +42,7 @@ export const CancelButton = styled(Link)`
 	transition: background 0.1s ease-in-out;
 	border-radius: 3px;
   background-color: #fff;
-	box-shadow: 0 1px 0 0 #000;
+	box-shadow: 0 1px 1px 0 #000;
 	outline: none;
 	cursor: pointer;
 `;

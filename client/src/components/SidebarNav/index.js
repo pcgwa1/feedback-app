@@ -24,12 +24,12 @@ const LinkWrapper = styled.li`
     > a {
       display: flex;
       align-items: center;
-      color: #000;
+      color: ${props => props.active ? '#fff' : '#333'};
       padding: 15px 30px;
       text-decoration: none;
       width: 100%;
       font-weight: bold;
-            
+      background: ${props => props.active ? '#333' : '#fff'};      
       &:hover {
         background-color: #333;
         color: white;
@@ -66,10 +66,23 @@ const Welcome = styled.i`
 `;
 
 export default class SidebarNav extends Component {
+  constructor(props) {
+    super(props);
+    this.setLocation = this.setLocation.bind(this);
+    this.state = {
+      page: '/surveys',
+    };
+  }
+  setLocation(url) {
+    this.setState({
+      page: url,
+    });
+  }
   render() {
     const { user } = this.props;
+    const { page } = this.state;
     return (
-      <Navbar>
+      <Navbar hide={!user}>
         <ul>
           <Top>
            <LogoLink to='/'>
@@ -80,9 +93,15 @@ export default class SidebarNav extends Component {
              <Welcome>Hello {user ? user.username : 'Guest'}</Welcome>
            </UserDetailsWrapper>
           </Top>
-          {user ? <LinkWrapper><Link to='/surveys'>Dashboard</Link></LinkWrapper> : <div />}
-          {user ? <LinkWrapper><Link to='/surveys/new'>Create Survey</Link></LinkWrapper> : <div />}
-          {user ? <LinkWrapper><a href='/api/logout'>Logout</a></LinkWrapper> : <div />}
+          <LinkWrapper onClick={() => this.setLocation('/surveys')} active={page === '/surveys'}>
+            <Link to='/surveys'>Dashboard</Link>
+          </LinkWrapper>
+          <LinkWrapper onClick={() => this.setLocation('/surveys/new')} active={page === '/surveys/new'}>
+            <Link to='/surveys/new'>Create Survey</Link>
+          </LinkWrapper>
+          <LinkWrapper onClick={() => this.setLocation('/api/logout')} active={page === '/api/logout'}>
+            <a href='/api/logout'>Logout</a>
+          </LinkWrapper>
         </ul>
       </Navbar>
     );
